@@ -10,7 +10,6 @@ html,body{
   height: 100%;
   width: 100%;
   display: flex;
-  flex-wrap:nowrap !important;
   justify-content:space-between;
   align-items: center;
   background-color: black;
@@ -21,15 +20,26 @@ html,body{
 }
 @media (max-width: 1024px) {
   html, body {
-    flex-wrap: wrap !important;
-  } 
+    flex-wrap: wrap;
+    overflow-y: auto;  
+    overflow-x: hidden;    
+    align-items: flex-start;
+  }
   .open-title{
-  position:relative;
-  line-height:1.5;
-  font-size:20px;
-  color:rgb(220, 1, 220);
-  text-align:center;
-}
+    font-size: 35px !important;
+    line-height: 1.2 !important;
+    width: 100% !important;
+    margin-top: 1rem !important;
+    margin:20px auto !important;
+  }
+  .flicker {
+    width: 10em !important;
+    height: 6rem !important;
+  }
+  .card {
+    margin: 10px auto !important; 
+  }
+  
 }
 .open-title{
   position:relative;
