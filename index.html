@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Wiz</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/weather-app-icon.png" type="image/x-icon">
+</head>
+<body>
+ <div id='stars'></div>
+<div id='stars3'></div>
+
+<div style="display:flex;flex-direction:column; align-items: center;gap:60px; margin-right:8%; margin-top:-5%;">
+  <img
+  src="images/thunder.png"
+  alt=""
+  class="flicker"
+/>
+  <h1 class="open-title"><span style="color: whitesmoke"><span style="color:skyblue">Weather Wiz</span> welcomes you,</span><br> stay ahead of the weather</h1>
+</div>
+
+
+  <div class="card">
+    <div class="search">
+      <input type="text" placeholder="Enter your city" spellcheck="false">
+      <button>
+        <svg style="margin-top: 6px; margin-left:6px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" class="search-icon-svg">
+          <path fill="#717171" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+          </path>
+      </svg>
+      </button>
+    </div>
+    <div class="error">
+      <p>Invalid city name</p>
+    </div>
+    <div class="weather">
+      <img src="images/rain2.png" class="weather-icon">
+      <h1 class="temp">22°c</h1>
+      <h2 class="city">New York</h2>
+      <div class="details">
+        <div class="col">
+          <img src="images/humidity2.png">
+          <div>
+            <p class="humidity">50%</p>
+            <p>Humidity</p>
+          </div>
+        </div>
+        <div class="col">
+          <img src="images/wind2.png">
+          <div>
+            <p class="wind">15 km/h</p>
+            <p>Wind Speed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    const apiKey = "ad6616318bb6983da554c30587011195";
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+    const searchBox = document.querySelector(".search input");
+    const searchBtn = document.querySelector(".search button");
+    const weatherIcon = document.querySelector(".weather-icon");
+
+
+    searchBtn.addEventListener("click", () => {
+      checkWeather(searchBox.value);
+    });
+    searchBox.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        searchBtn.click();
+      }
+    });
+
+
+    async function checkWeather(city) {
+      const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+      if(response.status == 404)
+    {
+      document.querySelector(".error").style.display = "block";
+      document.querySelector(".weather").style.display = "none";
+    }
+    else{
+      var data = await response.json();
+      console.log(data);
+      document.querySelector(".city").innerHTML = data.name;
+      document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
+      document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+      document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+      if (data.weather[0].main == "Clouds") {
+        weatherIcon.src = "images/clouds.png";
+      } else if (data.weather[0].main == "Rain") {
+        weatherIcon.src = "images/rain3.png";
+      } else if (data.weather[0].main == "Clear") {
+        weatherIcon.src = "images/clear2.png";
+      } else if (data.weather[0].main == "Mist") {
+        weatherIcon.src = "images/mist.png";
+      }else if (data.weather[0].main == "Drizzle") {
+        weatherIcon.src = "images/drizzle.png";
+      } 
+      document.querySelector(".weather").style.display = "block";
+      document.querySelector(".error").style.display = "none";
+    }
+    }
+  </script>
+</body>
+</html>
