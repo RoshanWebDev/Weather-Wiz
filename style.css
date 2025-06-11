@@ -10,7 +10,7 @@ html,body{
   height: 100%;
   width: 100%;
   display: flex;
-  flex-wrap:no-wrap;
+  flex-wrap:nowrap;
   justify-content:space-between;
   align-items: center;
   background-color: black;
@@ -18,6 +18,11 @@ html,body{
   background-size:cover;
   background-position: center;
   overflow:hidden;
+}
+@media (max-width: 1024px) {
+  html, body {
+    flex-wrap: wrap;
+  }
 }
 .open-title{
   position:relative;
