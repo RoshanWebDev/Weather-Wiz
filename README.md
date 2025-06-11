@@ -26,7 +26,7 @@
 
 ## 🔗 Live Demo
 
-[🌍 View Live on GitHub Pages](https://roshanwebdev.github.io/weather-wiz/)  
+[🌍 View Live on GitHub Pages](https://roshanwebdev.github.io/Weather-Wiz/)  
 
 
 ## 📁 How to Run Locally
